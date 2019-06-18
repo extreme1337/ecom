@@ -156,7 +156,7 @@ function send_message(){
         
         $result = mail($to, $subject, $message, $headers);
         if(!$result){
-            set_message("Sorry we could not osend our message");
+            set_message("Sorry we could not send our message");
             redirect("contact.php");
         }else{
             set_message("Your Message has been sent");
