@@ -108,15 +108,12 @@ function show_paypal(){
 
 
 
-function reports(){
+function process_transaction(){
     if(isset($_GET['tx'])){
         $amount = $_GET['amt'];
         $currency = $_GET['cc'];
         $transaction = $_GET['tx'];
         $status = $_GET['st'];
-        
-    
-    
         $total = 0;
         $item_quantity = 0;
         foreach($_SESSION as $name => $value){
