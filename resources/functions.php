@@ -192,6 +192,49 @@ function display_orders(){
     }
 }
 
+function get_products_in_admin(){
+    $query = query("SELECT * FROM products");
+    confirm($query);
+    
+    while($row = fetch_array($query)){
+        $orders = <<<DELIMETER
+        <tr>
+            <td>{$row['product_id']}</td>
+            <td>{$row['product_title']}<br>
+                <a href="index.php?edit_product&id={$row['product_id']}"><img src="{$row['product_image']}" alt=""></a>
+            </td>
+            <td>{$row['product_category_id']}</td>
+            <td>{$row['product_price']}</td>
+            <td>{$row['product_quantity']}</td>
+            <td><a class="btn btn-danger" href="../../resources/templates/back/delete_product.php?id={$row['product_id']}"><span class="glyphicon glyphicon-remove"></span></a></td>
+        </tr>
+        DELIMETER;
+        echo $orders;
+    }
+}
+
+function add_product(){
+    if(isset($_POST['publish'])){
+        $porduct_title       = escape_string($_POST['product_title']);
+        $porduct_category_id = escape_string($_POST['product_category_id']);
+        $porduct_price       = escape_string($_POST['product_price']);
+        $porduct_description = escape_string($_POST['product_description']);
+        $short_desc          = escape_string($_POST['short_desc']);
+        $porduct_quantity    = escape_string($_POST['product_quantity']);
+        $product_image       = escape_string($_FILES['file']['name']);
+        $image_temp_location = escape_string($_FILES['file']['tmp_name']);
+
+        move_uploaded_file($image_temp_location  , UPLOAD_DIRECTORY . DS . $product_image);
+        
+        $query = query("INSERT INTO products(product_title, product_category_id, product_price, product_description, short_desc, product_quantity, product_image) VALUES('{$porduct_title}', '{$porduct_category_id}', '{$porduct_price}', '{$porduct_description}', '{$short_desc}', '{$porduct_quantity}', '{$product_image}')");
+        $last_id = last_id();
+        confirm($query);
+        set_message("New product with id {$last_id} was added");
+        redirect("index.php?products");
+        
+    }
+}
+
 
 
 
