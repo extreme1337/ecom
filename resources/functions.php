@@ -313,11 +313,87 @@ function update_product() {
         set_message("Product with id {$last_id} has been updated");
         redirect("index.php?products");
     }
-
-
 }
 
+function show_categories_in_admin(){
+    $query = query("SELECT * FROM categories");
+    confirm($query);
+    while($row = fetch_array($query)){
+        $show_categories = <<<DELIMETER
+            <tr>
+                <td>{$row['cat_id']}</td>
+                <td>{$row['cat_title']}</td>
+                <td><a class="btn btn-danger" href="../../resources/templates/back/delete_category.php?id={$row['cat_id']}"><span class="glyphicon glyphicon-remove"></span></a></td>
+            </tr>
+        DELIMETER;
+        echo $show_categories;
+    }
+}
 
+function add_category(){
+    if(isset($_POST['add_category'])){
+        $cat_title = escape_string($_POST['cat_title']);
+        if(empty($cat_title) || $cat_title == " "){
+            set_message("This cannot be empty!!!");
+        }else{
+            $query = query("INSERT INTO categories(cat_title) VALUES('{$cat_title}')");
+            confirm($query);
+            set_message("Category created!");
+        }
+    }
+}
+
+function display_users(){
+    $query = query("SELECT * FROM users");
+    confirm($query);
+    
+    while($row = fetch_array($query)){
+        $user_id = $row['user_id'];
+        $user_email = $row['email'];
+        $username = $row['username'];
+        $password = $row['password'];
+        
+        $users = <<<DELIMETER
+        <tr>
+            <td>{$user_id}</td>
+            <td><a href="index.php?edit_user&id={$row['user_id']}">{$user_email}</a></td>
+            <td>{$username}</td>
+            <td><a class="btn btn-danger" href="../../resources/templates/back/delete_user.php?id={$row['user_id']}"><span class="glyphicon glyphicon-remove"></span></a></td>
+        </tr>
+        DELIMETER;
+        echo $users;
+    }
+}
+
+function add_user(){
+    if(isset($_POST['add_user'])){
+        $username = escape_string($_POST['username']);
+        $password = escape_string($_POST['password']);
+        $email = escape_string($_POST['email']);
+//        $user_photo = escape_string($_FILES['file']['name']);
+//        $photo_tmp = escape_string($_FILES['file']['tmp_name']);
+//        
+//        move_uploaded_file($photo_tmp,UPLOAD_DIRECTORY . DS . $user_photo);
+        
+        $query = query("INSERT INTO users(username, email, password) VALUES('{$username}','{$email}','{$password}')");
+        confirm($query);
+        set_message("User Created!!!");
+        redirect("index.php?users");
+    }
+}
+
+function update_user(){
+    if(isset($_POST['update_user'])){
+        $username = escape_string($_POST['username']);
+        $email = escape_string($_POST['email']);
+        $password = escape_string($_POST['password']);
+        
+        $query = query("UPDATE users SET username = '{$username}', email = '{$email}', password = '{$password}' WHERE user_id = " . escape_string($_GET['id']. " "));
+        confirm($query);
+        set_message("User with username {$username} has been updated");
+        redirect("index.php?users");
+    }
+}
 
 
 
