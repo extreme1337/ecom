@@ -50,7 +50,7 @@ function fetch_array($result){
 //get products
 
 function get_products(){
-    $query = query("SELECT * FROM products");
+    $query = query("SELECT * FROM products WHERE product_quantity >= 1");
     confirm($query);
     
     while($row = fetch_array($query)){
@@ -88,7 +88,7 @@ function get_categories(){
 }
 
 function get_products_in_cat_page(){
-    $query = query("SELECT * FROM products WHERE product_category_id=".escape_string($_GET['id'])." ");
+    $query = query("SELECT * FROM products WHERE product_category_id=".filter_input(INPUT_GET,'id',FILTER_SANITIZE_NUMBER_INT)." AND product_quantity >= 1");
     confirm($query);
     
     while($row = fetch_array($query)){
@@ -112,7 +112,7 @@ function get_products_in_cat_page(){
 }
 
 function get_products_in_shop_page(){
-    $query = query("SELECT * FROM products");
+    $query = query("SELECT * FROM products WHERE product_quantity >= 1");
     confirm($query);
     
     while($row = fetch_array($query)){
@@ -395,7 +395,44 @@ function update_user(){
     }
 }
 
+function get_reports(){
+    $query = query(" SELECT * FROM reports");
+    confirm($query);
+    while($row = fetch_array($query)) {
+    $report = <<<DELIMETER
+            <tr>
+                 <td>{$row['report_id']}</td>
+                <td>{$row['product_id']}</td>
+                <td>{$row['order_id']}</td>
+                <td>{$row['product_price']}</td>
+                <td>{$row['product_title']}
+                <td>{$row['product_quantity']}</td>
+                <td><a class="btn btn-danger" href="../../resources/templates/back/delete_report.php?id={$row['report_id']}"><span class="glyphicon glyphicon-remove"></span></a></td>
+            </tr>
 
+    DELIMETER;
 
+    echo $report;
+    }
+}
 
+function count_orders(){
+    $query = query("SELECT COUNT(*) FROM orders");
+    confirm($query);
+    $result = fetch_array($query);
+    print_r($result[0]);
+}
+
+function count_products(){
+    $query = query("SELECT COUNT(*) FROM products");
+    confirm($query);
+    $result = fetch_array($query);
+    print_r($result[0]);
+}
+function count_categories(){
+    $query = query("SELECT COUNT(*) FROM categories");
+    confirm($query);
+    $result = fetch_array($query);
+    print_r($result[0]);
+}
 ?>

@@ -44,6 +44,9 @@
                 if(isset($_GET['products'])){
                     include(TEMPLATE_BACK. "/products.php");
                 }
+                if(isset($_GET['reports'])){
+                    include(TEMPLATE_BACK. "/reports.php");
+                }
                 
                 ?>
 

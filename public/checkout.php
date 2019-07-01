@@ -1,5 +1,6 @@
 <?php require_once("../resources/config.php"); ?>
-<?php include(TEMPLATE_FRONT . DS . "header.php"); ?>
+<?php include(TEMPLATE_FRONT . DS . "header.php") ?>
+
 
 
 
@@ -13,28 +14,25 @@
       <h4 class="text-center bg-danger"><?php display_message(); ?></h4>
       <h1>Checkout</h1>
 
-
-    <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
-        <input type="hidden" name="cmd" value="_cart">
-        <input type="hidden" name="business" value="markobiz@gmail.com">
-        <input type="hidden" name="currency_code" value="US">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Product</th>
-                    <th>Price</th>
-                    <th>Quantity</th>
-                    <th>Sub-total</th>
-                </tr>
-            </thead>
+<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_cart">
+<input type="hidden" name="business" value="markobiz@gmail.com">
+<input type="hidden" name="currency_code" value="US">
+    <table class="table table-striped">
+        <thead>
+          <tr>
+           <th>Product</th>
+           <th>Price</th>
+           <th>Quantity</th>
+           <th>Sub-total</th>
+     
+          </tr>
+        </thead>
         <tbody>
-            
-                
-              <?php cart(); ?>
-            
+          <?php cart(); ?>
         </tbody>
     </table>
-    <?php show_paypal(); ?>
+  <?php echo show_paypal(); ?>
 </form>
 
 
@@ -45,12 +43,11 @@
 <h2>Cart Totals</h2>
 
 <table class="table table-bordered" cellspacing="0">
-
+<tbody>
 <tr class="cart-subtotal">
 <th>Items:</th>
-<td><span class="amount"><?php
-        echo isset($_SESSION['item_quantity']) ? $_SESSION['item_quantity'] : $_SESSION['item_quantity'] = "0";
-    ?></span></td>
+<td><span class="amount"><?php 
+echo isset($_SESSION['item_quantity']) ? $_SESSION['item_quantity'] : $_SESSION['item_quantity'] = "0";?></span></td>
 </tr>
 <tr class="shipping">
 <th>Shipping and Handling</th>
@@ -59,10 +56,12 @@
 
 <tr class="order-total">
 <th>Order Total</th>
-<td><strong><span class="amount">&#36; 
-    <?php
-        echo isset($_SESSION['item_total']) ? $_SESSION['item_total'] : $_SESSION['item_total'] = "0";
-    ?></span></strong> </td>
+<td><strong><span class="amount">&#36;<?php 
+echo isset($_SESSION['item_total']) ? $_SESSION['item_total'] : $_SESSION['item_total'] = "0";?>
+
+
+
+</span></strong> </td>
 </tr>
 
 
@@ -74,4 +73,7 @@
 
 
  </div><!--Main Content-->
-<?php include(TEMPLATE_FRONT . DS . "footer.php"); ?>
+
+
+
+<?php include(TEMPLATE_FRONT . DS . "footer.php") ?>

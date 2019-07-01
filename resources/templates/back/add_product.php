@@ -34,7 +34,7 @@
 
       <div class="col-xs-3">
         <label for="product-price">Product Price</label>
-        <input type="number" name="product_price" class="form-control" size="60">
+        <input type="number" step=".2" name="product_price" class="form-control" size="60">
       </div>
     </div>
     
