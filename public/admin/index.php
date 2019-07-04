@@ -32,6 +32,10 @@
                     include(TEMPLATE_BACK. "/add_user.php");
                 }
                 
+                if(isset($_GET['slides'])){
+                    include(TEMPLATE_BACK. "/slides.php");
+                }
+                
                 if(isset($_GET['categories'])){
                     include(TEMPLATE_BACK. "/categories.php");
                 }
@@ -47,6 +51,10 @@
                 if(isset($_GET['reports'])){
                     include(TEMPLATE_BACK. "/reports.php");
                 }
+                if(isset($_GET['delete_slide_id'])){
+                    include(TEMPLATE_BACK. "/delete_slide.php");
+                }
+                
                 
                 ?>
 
