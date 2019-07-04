@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 30, 2019 at 05:23 PM
+-- Generation Time: Jul 04, 2019 at 01:55 PM
 -- Server version: 10.3.15-MariaDB
 -- PHP Version: 7.3.6
 
@@ -39,8 +39,7 @@ CREATE TABLE `categories` (
 
 INSERT INTO `categories` (`cat_id`, `cat_title`) VALUES
 (1, 'example1'),
-(2, 'example2'),
-(5, 'category3');
+(2, 'example2');
 
 -- --------------------------------------------------------
 
@@ -61,10 +60,6 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`order_id`, `order_amount`, `order_transaction`, `order_status`, `order_currency`) VALUES
-(7, 324, '123123', 'Completed', 'USA'),
-(9, 324, '123123', 'Completed', 'USA'),
-(10, 324, '123123', 'Completed', 'USA'),
-(11, 324, '123123', 'Completed', 'USA'),
 (12, 324, '123123', 'Completed', 'USA');
 
 -- --------------------------------------------------------
@@ -92,7 +87,7 @@ INSERT INTO `products` (`product_id`, `product_title`, `product_category_id`, `p
 (1, 'product 1', 1, 24.99, 5, 'asdasdasdasdasdasdasdasd', 'fgjidhichschschicsihscihsch', 'fff.png'),
 (2, 'product 2', 2, 24.99, 6, 'sadcxsdasdasdadadasdasddsadadsaads', '515jadsadjdpjipadjpjoadsaso[dasd[po', 'fff.png'),
 (58, 'IDEMO NIS', 2, 23, 22222, 'IDEMO NIS OPIS', 'IDEMO NIS KRATAK OPIS', 'download.png'),
-(59, 'UPDATE First product', 1, 23, 23, 'FIRST UPDATE PRODUCT', 'SHORT DESC', 'download.png');
+(60, 'sad', 1, 2, 23, 'asd', 'asd', 'fff.png');
 
 -- --------------------------------------------------------
 
@@ -114,9 +109,31 @@ CREATE TABLE `reports` (
 --
 
 INSERT INTO `reports` (`report_id`, `order_id`, `product_id`, `product_price`, `product_title`, `product_quantity`) VALUES
-(5, 11, 1, 24.99, '', 2),
 (6, 11, 2, 24.99, '', 1),
-(7, 12, 1, 24.99, 'product 1', 4);
+(7, 12, 1, 24.99, 'product 1', 4),
+(8, 13, 1, 24.99, 'product 1', 1),
+(9, 14, 58, 23, 'IDEMO NIS', 2),
+(10, 15, 2, 24.99, 'product 2', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `slides`
+--
+
+CREATE TABLE `slides` (
+  `slide_id` int(11) NOT NULL,
+  `slide_title` varchar(255) NOT NULL,
+  `slide_image` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `slides`
+--
+
+INSERT INTO `slides` (`slide_id`, `slide_title`, `slide_image`) VALUES
+(25, 'first', 'download.jfif'),
+(26, 'third', 'shanghai.jpg');
 
 -- --------------------------------------------------------
 
@@ -168,6 +185,12 @@ ALTER TABLE `reports`
   ADD PRIMARY KEY (`report_id`);
 
 --
+-- Indexes for table `slides`
+--
+ALTER TABLE `slides`
+  ADD PRIMARY KEY (`slide_id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -187,19 +210,25 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- AUTO_INCREMENT for table `reports`
 --
 ALTER TABLE `reports`
-  MODIFY `report_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `report_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `slides`
+--
+ALTER TABLE `slides`
+  MODIFY `slide_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `users`
